@@ -118,7 +118,14 @@ Once unbundled, a new project directory will be created with name 'Test_GENIE3'.
 %% Go to /home/saptarshi/R/R-3.5.1/projects/Test_GENIE3/
 $ cd Test_GENIE3
 ```
-Directory 'Test_GENIE3' contains all required R scripts and two sub-directories: 'packrat' and 'asset'. The 'packrat' sub-directory is for internal management of 'packrat' and not to be interfered with. The 'asset' sub-directory is the place where the input and the output files are stored. Copy all the dataset files inside this sub-directory. For example, let us assume that the directory corresponding to https://github.com/aaiitg-grp/TGS/tree/master/datasets , in your local computer, is '/home/saptarshi/datasets'. Then copy all the files from that directory to 'TGS-Lite/asset':
+Directory 'Test_GENIE3' contains all required R scripts and two sub-directories: 'packrat' and 'asset'. The 'packrat' sub-directory is for internal management of 'packrat' and not to be interfered with. The 'asset' sub-directory is the place where the input and the output files are stored. To reproduce the results of a specific experiment, first you need to copy the corresponding input files into the 'asset' sub-directory:
+
+| Experiment | Input Files to Copy |
+| :------------ | :------------ |
+| Ds10n | Input\Datasets\Data\InSilicoSize10-Yeast1-trajectories.tsv <br> Input\Datasets\DREAM3GoldStandard_InSilicoSize10_Yeast1_TrueNet.RData <br> Input\Json_files\input.Ds10n.GENIE3.json |
+| Content in the first column | Content in the second column |
+
+Copy all the dataset files inside this sub-directory. For example, let us assume that the directory corresponding to https://github.com/aaiitg-grp/TGS/tree/master/datasets , in your local computer, is '/home/saptarshi/datasets'. Then copy all the files from that directory to 'TGS-Lite/asset':
 ```
 $ scp /home/saptarshi/datasets/* asset
 ```
