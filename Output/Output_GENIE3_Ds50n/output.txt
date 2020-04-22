@@ -1,0 +1,27 @@
+[1] "Series 1 is completed."
+[1] "Series 2 is completed."
+[1] "Series 3 is completed."
+[1] "Series 4 is completed."
+[1] "Series 5 is completed."
+[1] "Series 6 is completed."
+[1] "Series 7 is completed."
+[1] "Series 8 is completed."
+[1] "Series 9 is completed."
+[1] "Series 10 is completed."
+[1] "Series 11 is completed."
+[1] "Series 12 is completed."
+[1] "Series 13 is completed."
+[1] "Series 14 is completed."
+[1] "Series 15 is completed."
+[1] "Series 16 is completed."
+[1] "Series 17 is completed."
+[1] "Series 18 is completed."
+[1] "Series 19 is completed."
+[1] "Series 20 is completed."
+[1] "Series 21 is completed."
+[1] "Series 22 is completed."
+[1] "Series 23 is completed."
+elapsed_time = 
+
+   user  system elapsed 
+111.443   0.016 111.458 

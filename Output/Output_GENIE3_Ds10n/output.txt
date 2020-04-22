@@ -1,0 +1,8 @@
+[1] "Series 1 is completed."
+[1] "Series 2 is completed."
+[1] "Series 3 is completed."
+[1] "Series 4 is completed."
+elapsed_time = 
+
+   user  system elapsed 
+  0.894   0.011   0.906 
