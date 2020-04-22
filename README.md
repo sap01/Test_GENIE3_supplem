@@ -1,13 +1,13 @@
-# Supplementary Files for the TGS-Lite Paper
+# Supplementary Files for Reproducing GENIE3 Results
 
-To reproduce the results of TGS-Lite and TGS-Lite+ given in the paper, you need to follow the steps mentioned below. 
-* **Step 1:** Install R version 3.5.1 in your experimental environment ([here](https://github.com/sap01/TGS-Lite-supplem/blob/master/README.md#installing-r-version-351-in-the-experimental-environment))
-* **Step 2:** Execute the TGS-Lite and TGS-Lite+ algorithms ([here](https://github.com/sap01/TGS-Lite-supplem/blob/master/README.md#executing-the-tgs-lite-and-tgs-lite-algorithms-in-the-experimental-environment)).
+To reproduce the results of GENIE3, you need to follow the steps mentioned below. 
+* **Step 1:** Install R version 3.5.1 in your experimental environment ([here](https://github.com/sap01/Test_GENIE3_supplem/blob/master/README.md#installing-r-version-351-in-the-experimental-environment))
+* **Step 2:** Execute the GENIE3 algorithm ([here](https://github.com/sap01/Test_GENIE3_supplem/blob/master/README.md#executing-the-genie3-algorithm-in-the-experimental-environment)).
 
 ## Installing R version 3.5.1 in the Experimental Environment
 In this section, the following sub-steps are described:
-* Installing or compiling R ([here](https://github.com/sap01/TGS-Lite-supplem/blob/master/README.md#installing-or-compiling-r))
-* Installing the ‘packrat’ dependency management package for R ([here](https://github.com/sap01/TGS-Lite-supplem/blob/master/README.md#installing-the-packrat-dependency-management-package-for-r))
+* Installing or compiling R ([here](https://github.com/sap01/Test_GENIE3_supplem/blob/master/README.md#installing-or-compiling-r))
+* Installing the ‘packrat’ dependency management package for R ([here](https://github.com/sap01/Test_GENIE3_supplem/blob/master/README.md#installing-the-packrat-dependency-management-package-for-r))
 
 ### Installing or Compiling R
 The experimental environment uses R version 3.5.1 (hereafter, R-3.5.1). Therefore, it is expected that any R version, same or higher than that, should suffice. For R-3.5.1 installation in Windows or macOS, please consult the following official manuals, respectively.
@@ -15,10 +15,10 @@ The experimental environment uses R version 3.5.1 (hereafter, R-3.5.1). Therefor
   * Download R version 3.5.1 for Windows: https://cran.r-project.org/bin/windows/base/old/3.5.1
 * 'Installing R under macOS': https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Installing-R-under-macOS
 
-For Unix and Unix-alike OSs (like - Linux OSs), R-3.5.1 can be compiled to a destination directory of your choice from the R-3.5.1 source tarball ( https://github.com/sap01/TGS-Lite-supplem/blob/master/sourcecode/R-3.5.1.tar.gz ). Compilation is different from a system-wide installation. A R compilation inside a specific directory does not affect the system-wide installation or any other compilation inside any other directory. Thus, you may create multiple compilations in your system, where each
+For Unix and Unix-alike OSs (like - Linux OSs), R-3.5.1 can be compiled to a destination directory of your choice from the R-3.5.1 source tarball ( https://github.com/sap01/Test_GENIE3_supplem/blob/master/Sourcecode/R-3.5.1.tar.gz ). Compilation is different from a system-wide installation. A R compilation inside a specific directory does not affect the system-wide installation or any other compilation inside any other directory. Thus, you may create multiple compilations in your system, where each
 compilation refers to a distinct version of R.
 
-Please keep the source tarball and the ‘compileR351.sh’ shell script ( https://github.com/sap01/TGS-Lite-supplem/blob/master/sourcecode/compileR351.sh ) inside the same directory. Then open the shell script and replace the value of the variable ‘COMPILEPATH’ to a directory of your choice, where you wish to have the compiled R-3.5.1. For example:
+Please keep the source tarball and the ‘compileR351.sh’ shell script ( https://github.com/sap01/Test_GENIE3_supplem/blob/master/Sourcecode/compileR351.sh ) inside the same directory. Then open the shell script and replace the value of the variable ‘COMPILEPATH’ to a directory of your choice, where you wish to have the compiled R-3.5.1. For example:
 ```
 COMPILEPATH=/home/saptarshi/R/R-3.5.1
 ```
@@ -39,11 +39,11 @@ Copyright (C) 2018 The R Foundation for Statistical Computing
 ```
 Symbol '>' represents the R command prompt.
 
-If the compilation path is very long, writing this command can be a tedious process. Instead, go to your home directory and append the following line to your '.bashrc' file: 
+If the compilation path is very long, writing this command can be a tedious task. Instead, go to your home directory and append the following line to your '.bashrc' file: 
 ```
 alias R351=/home/saptarshi/R/R-3.5.1/bin/R
 ```
-Save and exit '.bashrc'. But the current bash session keeps using the older version of '.bashrc'. To mitigate this issue, source (reload) '.bashrc' as shown below:
+Save and exit '.bashrc'. However, the current bash session keeps using the older version of '.bashrc'. To mitigate this issue, source (reload) '.bashrc' as shown below:
 ```
 $ source .bashrc
 ```
@@ -61,12 +61,12 @@ For executing any R script with R-3.5.1, please use the following command in bas
 ```
 $ /home/saptarshi/R-3.5.1/bin/Rscript path/to/script/script_to_run.R
 ```
-**If ‘compileR531.sh’ Fails:** If 'compileR351.sh' fails (e.g. 'configure: error'), the reason behind the failure is that the OS does not have some of the required dependencies. Resolutions of a number of possible errors are discussed at: http://pj.freefaculty.org/blog/?p=315 ; if required, please find its offline PDF version at: https://github.com/sap01/TGS-Lite-supplem/blob/master/sourcecode/building-r-devel-PJ.pdf . Source tarballs of most of the dependency packages are stored at: http://r.research.att.com/src/ . Also the ‘Installing R under Unix-alikes’ official manual can be consulted at: https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Installing-R-under-Unix_002dalikes .
+**If ‘compileR531.sh’ Fails:** If 'compileR351.sh' fails (e.g. 'configure: error'), the reason behind the failure is that the OS does not have some of the required dependencies. Resolutions of a number of possible errors are discussed at: http://pj.freefaculty.org/blog/?p=315 ; if required, please find its offline PDF version at: https://github.com/sap01/Test_GENIE3_supplem/blob/master/Sourcecode/building-r-devel-PJ.pdf . Source tarballs of most of the dependency packages are stored at: http://r.research.att.com/src/ . Also the ‘Installing R under Unix-alikes’ official manual can be consulted at: https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Installing-R-under-Unix_002dalikes .
 
 ### Installing the 'packrat' Dependency Management Package for R
-Once R is installed, the next step is to install the ‘packrat’ package (https://CRAN.R-project.org/package=packrat). It provides a dependency management system for the algorithmic implementations. In other words, it automatically downloads and installs the required packages with the required versions when the implementations of the TGS-Lite and TGS-Lite+ algorithms are being installed.
+Once R is installed, the next step is to install the ‘packrat’ package (https://CRAN.R-project.org/package=packrat). It provides a dependency management system for the algorithmic implementations. In other words, it automatically downloads and installs the required packages with the required versions when the implementation of the GENIE3 algorithm is being installed.
 In the experimental environment, ‘packrat’ package version 0.4.9-3 is used. Therefore, it is expected that installing the same or higher version would be sufficient.
-In the experimental environment, a specific directory, namely 'src downloaded packages' is created to download required external packages, like - 'packrat'. Then the latest version of ‘packrat’ (version 0.4.9-3 at that time) is downloaded inside it and installed to the 'library' directory. This whole process is done through the following commands:
+In the experimental environment, a specific directory, namely 'src downloaded packages' is created to download required external packages, like - 'packrat'. Then the latest version of ‘packrat’ (version 0.4.9-3 at that time) is downloaded inside it and installed to the 'library' directory. This whole process is carried out through the following commands:
 
 ```
 %% Go to the R compilation’s home directory
@@ -87,15 +87,15 @@ $ R351
 dependencies = TRUE, repos = ’https://cloud.r-project.org/’,
 destdir = ’/home/saptarshi/R/R-3.5.1/src_downloaded_packages’)
 ```
-Finally, a directory with the name 'projects' is created where the algorithmic implementations would be installed.
+Finally, a directory with the name 'projects' is created where the algorithmic implementation would be installed.
 ```
 $ mkdir /home/saptarshi/R/R-3.5.1/projects
 ```
 
-## Executing the TGS-Lite and TGS-Lite+ Algorithms in the Experimental Environment
-The R implementations of the TGS-Lite and TGS-Lite+ algorithms are saved as a R project tarball (https://github.com/sap01/TGS-Lite-supplem/blob/master/sourcecode/TGS-Lite-2019-04-15.tar.gz). Copy this file to '/home/saptarshi/R/R-3.5.1/projects':
+## Executing the GENIE3 Algorithm in the Experimental Environment
+The R implementation of the GENIE3 algorithm is saved as an R project tarball (https://github.com/sap01/Test_GENIE3_supplem/blob/master/Sourcecode/Test_GENIE3-2020-04-20.tar.gz). This implementation is an extension of R package 'GENIE3' (https://bioconductor.org/packages/GENIE3/). The original implementation in the GENIE3 package is targetted towards cross-sectional data, whereas this extended implementation is customized for time-series data. To use the extended implementation, copy the aforementioned tarball to '/home/saptarshi/R/R-3.5.1/projects':
 ```
-$ mv TGS-Lite-2019-04-15.tar.gz /home/saptarshi/R/R-3.5.1/projects
+$ scp Test_GENIE3-2020-04-20.tar.gz /home/saptarshi/R/R-3.5.1/projects
 ```
 After that, unbundle the project using 'packrat':
 ```
@@ -110,18 +110,15 @@ $ R351
 ## https://cran.rstudio.com/
 > options(repos=structure(c(CRAN="https://cran.rstudio.com/")))
 
-## Attach ’packrat’ package
-> library(packrat)
-
 ## Unbundle the project inside the current directory
-> packrat::unbundle(’TGS-Lite-2019-04-15.tar.gz’, getwd())
+> packrat::unbundle(’Test_GENIE3-2020-04-20.tar.gz’, getwd())
 ```
-Once unbundled, a new project directory will be created with name 'TGS-Lite'. Go inside the project directory:
+Once unbundled, a new project directory will be created with name 'Test_GENIE3'. Go inside the project directory:
 ```
-%% Go to /home/saptarshi/R/R-3.5.1/projects/TGS-Lite
-$ cd TGS-Lite
+%% Go to /home/saptarshi/R/R-3.5.1/projects/Test_GENIE3/
+$ cd Test_GENIE3
 ```
-Directory 'TGS-Lite' contains all required R scripts and two sub-directories: 'packrat' and 'asset'. The 'packrat' sub-directory is for internal management of 'packrat' and not to be interfered with. The 'asset' sub-directory is the place where the input and the output files are stored. Copy all the dataset files inside this sub-directory. For example, let us assume that the directory corresponding to https://github.com/aaiitg-grp/TGS/tree/master/datasets , in your local computer, is '/home/saptarshi/datasets'. Then copy all the files from that directory to 'TGS-Lite/asset':
+Directory 'Test_GENIE3' contains all required R scripts and two sub-directories: 'packrat' and 'asset'. The 'packrat' sub-directory is for internal management of 'packrat' and not to be interfered with. The 'asset' sub-directory is the place where the input and the output files are stored. Copy all the dataset files inside this sub-directory. For example, let us assume that the directory corresponding to https://github.com/aaiitg-grp/TGS/tree/master/datasets , in your local computer, is '/home/saptarshi/datasets'. Then copy all the files from that directory to 'TGS-Lite/asset':
 ```
 $ scp /home/saptarshi/datasets/* asset
 ```
