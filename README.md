@@ -1,5 +1,4 @@
 # Supplementary Files for Reproducing GENIE3 Results
-
 To reproduce the results of GENIE3, you need to follow the steps mentioned below. 
 * **Step 1:** Install R version 3.5.1 in your experimental environment ([here](https://github.com/sap01/Test_GENIE3_supplem/blob/master/README.md#installing-r-version-351-in-the-experimental-environment))
 * **Step 2:** Execute the GENIE3 algorithm ([here](https://github.com/sap01/Test_GENIE3_supplem/blob/master/README.md#executing-the-genie3-algorithm-in-the-experimental-environment)).
@@ -126,24 +125,104 @@ Directory 'Test_GENIE3' contains all required R scripts and two sub-directories:
 | Ds50n | Input\Datasets\Data\InSilicoSize50-Yeast1-trajectories.tsv <br> Input\Datasets\DREAM3GoldStandard_InSilicoSize50_Yeast1_TrueNet.RData <br> Input\Json_files\input.Ds50n.GENIE3.json |
 | Ds100n | Input\Datasets\Data\InSilicoSize100-Yeast1-trajectories.tsv <br> Input\Datasets\DREAM3GoldStandard_InSilicoSize100_Yeast1_TrueNet.RData <br> Input\Json_files\input.Ds100n.GENIE3.json |
 
-Copy all the dataset files inside this sub-directory. For example, let us assume that the directory corresponding to https://github.com/aaiitg-grp/TGS/tree/master/datasets , in your local computer, is '/home/saptarshi/datasets'. Then copy all the files from that directory to 'TGS-Lite/asset':
+For example, if you wish to reproduce the results of the 'Ds10n' experiment, then copy the corresponding input files into the 'asset' sub-directory. A brief description of these files are given in the following table.
+
+| File Name | Description |
+| :------------ | :------------ |
+| InSilicoSize10-Yeast1-trajectories.tsv | Time-seies dataset |
+| DREAM3GoldStandard_InSilicoSize10_Yeast1_TrueNet.RData | True Network |
+| input.Ds10n.GENIE3.json | Input parameters for the GENIE3 algorithm <br> saved in a JSON file (http://www.json.org/) |
+
+Once the aforementioned files are copied inside the 'asset' sub-directory, you need to run the GENIE3 algorithm. To do that, please execute the driver R script 'GENIE3.R':
 ```
-$ scp /home/saptarshi/datasets/* asset
-```
-The driver R script is 'TGS-Lite/TGS.R'. It takes the user-defined input parameters in a JSON file format (http://www.json.org/). The JSON file must reside in the ‘asset’ sub-directory. ‘TGS.R’ can be executed with the following command:
-```
-%% Assuming ’TGS-Lite/asset/input.json’ contains the user-defined parameters.
-%% Note that only ’input.json’ is used instead of ’asset/input.json’. This
-%% is because ’TGS.R’ is programmed to search for the input JSON files in
-%% the ’asset’ sub-directory.
-%% The ’&’ symbol instructs the execution process to start in the background.
-$ nohup time /home/saptarshi/R/R-3.5.1/bin/Rscript TGS.R input.json &
+%% Kindly Note that only 'input.Ds10n.GENIE3.json' is used instead of 
+%% 'asset/input.Ds10n.GENIE3.json'. This is because 'GENIE3.R' is
+%% programmed to search for input JSON files in
+%% the 'asset' sub-directory.
+%% The '&' symbol instructs the execution process to start in the background.
+$ nohup time -v /home/saptarshi/R/R-3.5.1/bin/Rscript GENIE3.R input.Ds10n.GENIE3.json > nohup.Ds10n.GENIE3.out &
 
 %% Prints the process ID
 [1] 8172
 ```
-Since, the execution process is performed in the background, the bash command prompt can be used for other tasks. Once the execution is complete, a ‘Done’ message is automatically displayed in bash. However, if you wish to monitor the execution of the process, you may do so with the ‘top’ command as shown below:
+Since, the execution process is performed in the background, the bash command prompt can be used for other tasks. If you wish to monitor the execution of the process, you may do so with the ‘top’ command as shown below:
 ```
 %% Show details of the process with ID 8172
 $ top -p 8172
 ```
+After the execution is completed, please open file 'nohup.Ds10n.GENIE3.out'. The first two lines provides path to the output directory:
+```
+[1] "The output directory name is:"
+[1] "/home/user/R/R-3.5.1/projects/Test_GENIE3/asset/output20200421115456"
+```
+The output directory is automatically created with the name 'output' followed by the current date-time. In the above example, directory name 'output20200421115456' stands for 'output directory created on 2020-04-21 11:54:56'.  
+Go to the output directory. Inside the output directory, the following three files can be found:
+
+| File Name | Description |
+| :------------ | :------------ |
+| di_net_adj_matrix_wt.RData | Weighted adjacency matrix of the <br> gene regulatory network reconstructed by GENIE3 |
+| output.txt | Console output |
+| sessionInfo.txt | R session information |
+
+The 'di_net_adj_matrix_wt.RData' contains an R object named 'di_net_adj_matrix_wt'. This object is a matrix of dimension (number of genes * number of genes). The (i, j)-th cell of the matrix contains a real number representing the confidence of GENIE3 in assigning an edge from gene i to gene j. This number is known as the weight of that edge. The higher the weight, the higher the confidence behind that edge. Therefore, you may wish to sort the edges according to their weights and list the top edges. For that purpose, please open an R command prompt inside the 'Test_GENIE3/' directory and run the following R commands.   
+```r
+## Please execute the following commands
+## from the 'Test_GENIE3/' directory.
+
+## Remove existing R objects, if any.
+base::rm(list = base::ls())
+
+## Load the reconstructed gene regulatory network
+load('asset/Output_GENIE3_Ds10n/di_net_adj_matrix_wt.RData')
+
+## List top 4 edges by weight 
+di_net_adj_list <- GENIE3::getLinkList(di_net_adj_matrix_wt, reportMax = 4, threshold = 0)
+
+## Print top 4 edges.
+## Console output lines are prepended with '#>'.
+base::print(di_net_adj_list)
+#>   regulatoryGene targetGene    weight
+#> 1             G3        G10 1.1180511
+#> 2             G6         G9 0.8717695
+#> 3             G2         G7 0.8273007
+#> 4             G2         G1 0.8043170
+
+## Save top 4 edges as an RData file.
+## Please replace <output_dir> with
+## your output directory name.
+base::save(di_net_adj_list, file = 'asset/<output_dir>/di_net_adj_list_top4.RData')
+```
+Next, you may wish to calculate the correctness of the selected edges. To do so, please run the following R commands.
+```r
+## Load the R functions required for calculating correctness
+base::source('calc_correctness.R')
+
+## Load the true gene regulatory network
+load('asset/DREAM3GoldStandard_InSilicoSize10_Yeast1_TrueNet.RData')
+
+## Calculate correctness
+correctness <- CalcCorrectnessNetPredDiListVsTrueDiMx(di_net_adj_list, true.net.adj.matrix, print_tr_pos = TRUE)
+
+## Print correctness.
+## Console output lines are prepended with '#>'.
+## TP = Number of true positives.
+## TN = Number of true negatives.
+## FP = Number of false positives.
+## FN = Number of false negatives.
+## TPR = True positive rate or recall.
+## FPR = False positive rate.
+## FDR = False discovery rate.
+## PPV = Positive predictive value or precision.
+## ACC = Accuracy.
+## MCC = Matthews Correlation co-efficient.
+## F1 = F1-score.
+base::print(correctness)
+#>      TP TN FP FN TPR        FPR FDR PPV  ACC         MCC F1
+#> [1,]  0 86  4 10   0 0.04444444   1   0 0.86 -0.06804138  0
+
+## Save correctness metrics as an RData file.
+## Please replace <output_dir> with
+## your output directory name.
+base::save(correctness, file = 'asset/<output_dir>/correctness_top4.RData')
+```
+You may find the previously produced results [here](https://github.com/sap01/Test_GENIE3_supplem/blob/master/Output/).
