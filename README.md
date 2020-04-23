@@ -164,6 +164,15 @@ Go to the output directory. Inside the output directory, the following three fil
 | output.txt | Console output |
 | sessionInfo.txt | R session information |
 
+Please open 'output.txt'. At the end of the file, the elapsed time is displayed as shown below:
+```
+elapsed_time = 
+
+   user  system elapsed 
+  0.894   0.011   0.906 
+```
+In this case, the runtime of GENIE3 is considered to be 0.906 seconds.  
+
 The 'di_net_adj_matrix_wt.RData' contains an R object named 'di_net_adj_matrix_wt'. This object is a matrix of dimension (number of genes * number of genes). The (i, j)-th cell of the matrix contains a real number representing the confidence of GENIE3 in assigning an edge from gene i to gene j. This number is known as the weight of that edge. The higher the weight, the higher the confidence behind that edge. Therefore, you may wish to sort the edges according to their weights and list the top edges. For that purpose, please open an R command prompt inside the 'Test_GENIE3/' directory and run the following R commands.   
 ```r
 ## Please execute the following commands
